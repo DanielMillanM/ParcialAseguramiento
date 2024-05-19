@@ -7,24 +7,46 @@ let currentGrades = [["txtGrade1", "txtPercentage1"]];
 btnNewGrade.addEventListener("click", addNewGrade);
 
 function addNewGrade() {
-    if(cont >= maxGrades) {
+    if (cont >= maxGrades) {
         alert("Máximo número de notas alcanzado");
         return;
     }
-    cont ++;
-    grades.innerHTML += `<div class="row">
-    <div data-mdb-input-init class="form-outline form-white mb-2 pr-2 row col-4 mr-8 me-2">
+    cont++;
+    const newGradeId = `grade_${cont}`;
+
+    const newGradeDiv = document.createElement("div");
+    newGradeDiv.className = "row";
+    newGradeDiv.id = newGradeId;
+
+    const gradeInputDiv = document.createElement("div");
+    gradeInputDiv.className = "form-outline form-white mb-2 pr-2 row col-4 mr-8 me-2";
+    gradeInputDiv.innerHTML = `
         <input type="text" id="txtGrade${cont}" class="form-control form-control-md" />
         <label class="form-label" for="txtGrade${cont}">Nota</label>
-    </div>
-    <div data-mdb-input-init class="form-outline form-white mb-2 row col-4 mx-auto">
+    `;
+
+    const percentageInputDiv = document.createElement("div");
+    percentageInputDiv.className = "form-outline form-white mb-2 row col-4 mx-auto";
+    percentageInputDiv.innerHTML = `
         <input type="text" id="txtPercentage${cont}" class="form-control form-control-md" />
         <label class="form-label" for="txtPercentage${cont}">Porcentaje</label>
-    </div>
-    <div data-mdb-input-init class="form-outline form-white mb-4 row col-4 mx-auto">
-        <button type="button" class="btn btn-danger">Remover</button>
-    </div>
-</div>`;
+    `;
+
+    const removeBtnDiv = document.createElement("div");
+    removeBtnDiv.className = "form-outline form-white mb-4 row col-4 mx-auto";
+    removeBtnDiv.innerHTML = `
+        <button type="button" class="btn btn-danger" onclick="removeGrade('${newGradeId}')">Remover</button>
+    `;
+
+    newGradeDiv.appendChild(gradeInputDiv);
+    newGradeDiv.appendChild(percentageInputDiv);
+    newGradeDiv.appendChild(removeBtnDiv);
+
+    grades.appendChild(newGradeDiv);
+
+    currentGrades.push([`txtGrade${cont}`, `txtPercentage${cont}`]);
+}
+
 function removeGrade(gradeId) {
     if (currentGrades.length === 1) {
         alert("No puede eliminar todas las notas");
