@@ -21,7 +21,7 @@
                     <p class="text-white-50 mb-2">Ingresa tu notas y porcentajes</p>
       
                     <div class="container" id="grades">
-                        <div class="row">
+                        <div class="row" id="grade_1">
                             <div data-mdb-input-init class="form-outline form-white mb-2 pr-2 row col-4 mr-8 me-2">
                                 <input type="number" id="txtGrade1" class="form-control form-control-md" />
                                 <label class="form-label" for="txtGrade1">Nota</label>
@@ -31,7 +31,7 @@
                                 <label class="form-label" for="txtPercentage1">Porcentaje</label>
                             </div>
                             <div data-mdb-input-init class="form-outline form-white mb-4 row col-4 mx-auto">
-                                <button type="button" class="btn btn-danger" id="btnRemoveGrade1">Remover</button>
+                                <button type="button" class="btn btn-danger" id="btnRemoveGrade1" onclick="removeGrade('grade_1')">Remover</button>
                             </div>
                         </div>
                     </div>
