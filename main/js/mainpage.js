@@ -4,6 +4,24 @@ const btnNewGrade = document.getElementById("btnNewGrade");
 const grades = document.getElementById("grades");
 let currentGrades = [["txtGrade1", "txtPercentage1"]];
 
+document.getElementById("txtGrade1").addEventListener("input", () => {
+    if (parseInt(document.getElementById("txtGrade1").value) > 5) {
+        document.getElementById("txtGrade1").value = 5;
+    }
+    if (parseInt(document.getElementById("txtGrade1").value) < 0) {
+        document.getElementById("txtGrade1").value = 0;
+    }
+});
+
+document.getElementById("txtPercentage1").addEventListener("input", () => {
+    if (parseInt(document.getElementById("txtPercentage1").value) > 100) {
+        document.getElementById("txtPercentage1").value = 100;
+    }
+    if (parseInt(document.getElementById("txtPercentage1").value) < 0) {
+        document.getElementById("txtPercentage1").value = 0;
+    }
+});
+
 btnNewGrade.addEventListener("click", addNewGrade);
 
 function addNewGrade() {
@@ -43,6 +61,21 @@ function addNewGrade() {
     newGradeDiv.appendChild(removeBtnDiv);
 
     grades.appendChild(newGradeDiv);
+
+    const txtGrade = document.getElementById(`txtGrade${cont}`);
+    const txtPercentage = document.getElementById(`txtPercentage${cont}`);
+
+    txtGrade.addEventListener("input", () => {
+        if (parseInt(txtGrade.value) > 5) {
+            txtGrade.value = 5;
+        }
+    });
+
+    txtPercentage.addEventListener("input", () => {
+        if (parseInt(txtPercentage.value) > 100) {
+            txtPercentage.value = 100;
+        }
+    });
 
     currentGrades.push([`txtGrade${cont}`, `txtPercentage${cont}`]);
 }
