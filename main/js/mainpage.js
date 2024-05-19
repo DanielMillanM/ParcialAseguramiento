@@ -1,8 +1,12 @@
 let cont = 1;
 const maxGrades = 10;
 const btnNewGrade = document.getElementById("btnNewGrade");
+const btnCalculate = document.getElementById("btnCalculate");
 const grades = document.getElementById("grades");
 let currentGrades = [["txtGrade1", "txtPercentage1"]];
+
+btnNewGrade.addEventListener("click", addNewGrade);
+btnCalculate.addEventListener("click", calculate);
 
 document.getElementById("txtGrade1").addEventListener("input", () => {
     if (parseInt(document.getElementById("txtGrade1").value) > 5) {
@@ -21,8 +25,6 @@ document.getElementById("txtPercentage1").addEventListener("input", () => {
         document.getElementById("txtPercentage1").value = 0;
     }
 });
-
-btnNewGrade.addEventListener("click", addNewGrade);
 
 function addNewGrade() {
     if (cont >= maxGrades) {
@@ -94,4 +96,21 @@ function removeGrade(gradeId) {
         }
     }
     console.log(currentGrades);
+}
+
+function calculate() {
+    let percentageCont = 0;
+    for (const grade of currentGrades) {
+        const gradaInput = document.getElementById(grade[0]);
+        const percentageInput = document.getElementById(grade[1]);
+        if(gradaInput.value.length === 0 || percentageInput.value.length === 0){
+            alert("Debe llenar todos los campos");
+            return;
+        }
+        percentageCont += percentageInput.value;
+    }
+    if(percentageCont >= 100) {
+        alert("Sumatoria de porcentajes no válido");
+        return;
+    }
 }
